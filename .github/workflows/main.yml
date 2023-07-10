@@ -16,8 +16,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Run tests
-        uses: ./gradlew clean test
+#      - name: Run tests
+#        uses: ./gradlew clean test
 
       - name: Build with Gradle
         uses: ./gradlew build
