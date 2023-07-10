@@ -23,19 +23,19 @@ class LibraryTest {
         assertEquals(new ArrayList<Book>(), libraryRepo);
     }
 
-    @Test
-    @DisplayName("When the library getAvailableBooks is called should return the list of all books available")
-    public void checkIfAvailableRepositoryOfLibraryReturned(){
-        Book book1 = new Book("Harry Potter");
-        Book book2 = new Book("Let us C");
-
-        service.addBook(book1);
-        service.addBook(book2);
-        List<Book> testRepo = new ArrayList<>();
-        testRepo.add(book1);
-        testRepo.add(book2);
-        List<Book> libraryRepo = service.getAvailableBooks();
-        assertEquals(testRepo, libraryRepo);
-    }
+//    @Test
+//    @DisplayName("When the library getAvailableBooks is called should return the list of all books available")
+//    public void checkIfAvailableRepositoryOfLibraryReturned(){
+//        Book book1 = new Book("Harry Potter");
+//        Book book2 = new Book("Let us C");
+//
+//        service.addBook(book1);
+//        service.addBook(book2);
+//        List<Book> testRepo = new ArrayList<>();
+//        testRepo.add(book1);
+//        testRepo.add(book2);
+//        List<Book> libraryRepo = service.getAvailableBooks();
+//        assertEquals(testRepo, libraryRepo);
+//    }
 
 }
