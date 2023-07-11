@@ -75,7 +75,7 @@ jobs:
             sudo docker stop myappcontainer || true
             sudo docker rm myappcontainer || true
             sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            sudo docker run -d --name myappcontainer -p 80:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            sudo docker run -d --name myappcontainer -p 8080:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
 #      - name: Deploy docker image to EC2
 #          run: |
