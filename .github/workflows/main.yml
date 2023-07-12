@@ -1,4 +1,3 @@
-
 name: main
 
 on: [push]
@@ -33,11 +32,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
-
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -46,14 +43,54 @@ jobs:
         run: |-
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
       - name: Publish artifact
         uses: actions/upload-artifact@v3
         with:
           name: Package
           path: build/libs
 
-      - name: Deploy docker image to EC2
+      #  EC2-Deploy:
+      #    runs-on: ubuntu-latest
+      #    steps:
+      #      - id: deploy
+      #        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.0
+      #        with:
+      #          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #          aws_default_region: ap-south-1
+      #          dot_env: ${{ secrets.DOT_ENV }}
+
+      #      - name: deploy docker image to ec2
+      #        env:
+      #          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #          ECR_REPOSITORY: icecream
+      #        env:
+      #          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #          ECR_REPOSITORY: icecream
+      #          IMAGE_TAG: latest
+      #          AWS_REGION: ap-south-1
+      #          AWS_DEFAULT_REGION: ap-south-1
+      #        uses: appleboy/ssh-action@master
+      #        with:
+      #          host: ${{ env.PUBLIC_SERVER_IP }}
+      #          username: ubuntu
+      #          key: ${{ env.PRIVATE_SSH_KEY }}
+      #          envs: PRIVATE_SSH_KEY,ECR_REGISTRY,ECR_REPOSITORY,IMAGE_TAG,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_DEFAULT_REGION,AWS_REGION
+      #          script: |-
+      #            sudo apt update
+      #            sudo apt install docker.io -y
+      #            sudo apt install awscli -y
+      #            sudo $(aws ecr get-login --no-include-email --region ap-south-1);
+      #            sudo docker stop myappcontainer || true
+      #            sudo docker rm myappcontainer || true
+      #            sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      #            sudo docker run -d --name myappcontainer -p 8080:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      #      - name: Deploy docker image to EC2
+      #          run: |
+      #            docker pull 130878056308.dkr.ecr.us-west-2.amazonaws.com/icecream:latest
+
+      - name: Deploy docker image to ec2
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: icecream
@@ -74,4 +111,3 @@ jobs:
             sudo docker rm myappcontainer || true
             sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             sudo docker run -d --name myappcontainer -p 8080:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
