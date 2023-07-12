@@ -5,6 +5,7 @@ env:
   PRIVATE_SSH_KEY: ${{ secrets.AWS_SSH_KEY_PRIVATE }}
   PUBLIC_SERVER_IP: ${{ secrets.PUBLIC_SERVER_IP }}
 
+
 jobs:
 
   build:
