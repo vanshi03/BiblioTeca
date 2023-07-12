@@ -74,3 +74,4 @@ jobs:
             sudo docker rm myappcontainer || true
             sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             sudo docker run -d --name myappcontainer -p 8080:8080 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
