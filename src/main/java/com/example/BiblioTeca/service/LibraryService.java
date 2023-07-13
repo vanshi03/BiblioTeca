@@ -21,4 +21,16 @@ public class LibraryService {
         libraryRepository.returnBook(book);
     }
 
+    public boolean checkoutBook(Book book){
+        List<Book> libraryRepo= this.library.getCheckOutBookList();
+        for(Book libraryBook : libraryRepo){
+            if(libraryBook.getBookName().equalsIgnoreCase(book.getBookName())) {
+                libraryRepo.remove(libraryBook);
+                library.getCheckOutBookList().add(libraryBook);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

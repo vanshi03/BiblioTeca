@@ -1,6 +1,7 @@
 package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
+import com.example.BiblioTeca.model.Library;
 import com.example.BiblioTeca.service.LibraryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -46,6 +50,30 @@ class BiblioTecaControllerTest {
 //        ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
 //    }
 //
+//    }
+    @Test
+    @DisplayName("When the library checkOutBook is called should return true if Checkout is successful")
+    public void checkIfBookIsCheckedOut() throws Exception{
+        Book book = new Book("Let us C", "Yashavant Kanetkar", 2004);
+        //ObjectMapper objectMapper = new ObjectMapper();
+        when(libraryService.checkoutBook(book)).thenReturn(true); //anyBook
+
+        mockMvc.perform(post("/viewCheckOutBook")
+                .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"bookName\":\"Let us C\",\"author\":\"Yashavant Kanetkar\",\"publicationYear\":2004}"))
+//                        .content(objectMapper.writeValueAsString(book)))
+                .andExpect(status().isOk());
+
+
+
+
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isCreated())
+//                .andExpect(content().contentType(MediaType.))
+//                                .json("{'data':[{'useRegEx':'false','hosts':'v2v2v2'}]}")));
+
+
+    }
     @Test
     @DisplayName("Should be able to return an issued book")
     public void ableToReturnAnIssuedBook() throws Exception{
@@ -74,4 +102,5 @@ class BiblioTecaControllerTest {
                 ,times(1)).returnBook(any(Book.class));
 
     }
+
 }

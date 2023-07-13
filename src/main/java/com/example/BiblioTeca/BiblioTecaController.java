@@ -5,6 +5,9 @@ import com.example.BiblioTeca.service.LibraryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,4 +62,8 @@ public class BiblioTecaController {
 
     }
 
+    @RequestMapping("/viewCheckOutBook")
+    public boolean viewCheckOutBookList(@RequestBody Book book) {
+        return service.checkoutBook(book);
+    }
 }

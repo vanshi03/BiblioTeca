@@ -1,13 +1,13 @@
 package com.example.BiblioTeca.model;
 
-import org.springframework.stereotype.Component;
-
 public class Book{
     private String bookName = "";
     private String author = "";
     private int publicationYear = 0;
 
-    public Book(){}
+    public Book() {
+
+    }
     public Book(String bookName) {
         this.bookName = bookName;
     }
