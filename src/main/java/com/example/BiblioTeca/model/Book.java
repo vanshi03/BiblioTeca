@@ -7,6 +7,7 @@ public class Book{
     private String author = "";
     private int publicationYear = 0;
 
+    public Book(){}
     public Book(String bookName) {
         this.bookName = bookName;
     }

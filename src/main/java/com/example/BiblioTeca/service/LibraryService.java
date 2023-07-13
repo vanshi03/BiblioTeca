@@ -17,8 +17,17 @@ public class LibraryService {
         return library.getRepository();
     }
 
-    public boolean addBook(Book book){
-        return library.addBookToRepository(book);
+    public boolean returnBook(Book book) {
+
+        List<Book> issuedBook = library.getIssuedBooks();
+        for(int i=0; i<issuedBook.size(); i++){
+            if(issuedBook.get(i).getBookName().equalsIgnoreCase(book.getBookName())){
+                issuedBook.remove(book);
+                library.getRepository().add(book);
+                return false;
+            }
+        }
+        return true;
     }
 
 }

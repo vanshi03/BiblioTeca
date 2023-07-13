@@ -2,6 +2,8 @@ package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.service.LibraryService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,6 +50,10 @@ public class BiblioTecaController {
             }
             return bookList;
         }
+    }
+    @PostMapping("/returnBook")
+    public boolean returnBook(@RequestBody Book book){
+        return service.returnBook(book);
     }
 
 }
