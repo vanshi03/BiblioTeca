@@ -1,7 +1,6 @@
 package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
-import com.example.BiblioTeca.model.Library;
 import com.example.BiblioTeca.service.LibraryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,30 +13,21 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class BiblioTecaControllerTest {
 
     @MockBean
-    LibraryService libraryService;
     LibraryService service;
 
     @Autowired
     MockMvc mockMvc;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1755977 ([Anjali,Vanshi]Added Checkout functionality)
 //    @Test
 //    @DisplayName("When the library has books available and showBookList is called then it should return the list of all books available")
 //    public void checkIfAvailableRepositoryOfLibraryReturned() throws Exception{
@@ -47,17 +37,8 @@ class BiblioTecaControllerTest {
 //        List<Book> testRepo = new ArrayList<>();
 //        testRepo.add(book1);
 //        testRepo.add(book2);
-<<<<<<< HEAD
-//
-////        when(biblioTecaController.viewBookList()).thenReturn(testRepo.toString());
-=======
-//        when(libraryService.getAvailableBooks()).thenReturn(testRepo);
->>>>>>> 1755977 ([Anjali,Vanshi]Added Checkout functionality)
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("/viewBookList")
-//                .contentType(MediaType.APPLICATION_JSON)
-//        ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
-<<<<<<< HEAD
+
+
 //    }
 //
 //    }
