@@ -56,9 +56,9 @@ public class BiblioTecaController {
         }
     }
     @PostMapping("/returnBook")
-    public ResponseEntity returnBook(@RequestBody Book book){
-        service.returnBook(book);
-        return ResponseEntity.ok().build();
+    public boolean returnBook(@RequestBody Book book){
+        return service.returnBook(book);
+        //ResponseEntity.ok().build();
 
     }
 

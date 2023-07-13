@@ -19,8 +19,8 @@ public class LibraryService {
         return libraryRepository.getAvailableBooks();
     }
 
-    public void returnBook(Book book) {
-        libraryRepository.returnBook(book);
+    public boolean returnBook(Book book) {
+        return libraryRepository.returnBook(book);
     }
 
     public boolean checkoutBook(Book book){

@@ -35,9 +35,12 @@ public class LibraryRepository {
         this.issuedBooks.add(book);
         this.availableBooks.remove(book);
     }
-    public void returnBook(Book book){
-        this.issuedBooks.remove(book);
-        this.availableBooks.add(book);
-
+    public boolean returnBook(Book book){
+        boolean isRemoved = this.issuedBooks.remove(book);
+        if(isRemoved) {
+            this.availableBooks.add(book);
+            return true;
+        }
+        return false;
     }
 }
