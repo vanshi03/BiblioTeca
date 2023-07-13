@@ -2,10 +2,13 @@ package com.example.BiblioTeca.service;
 
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.model.LibraryRepository;
+import com.example.BiblioTeca.model.User;
 import com.example.BiblioTeca.model.Movie;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LibraryService {
@@ -22,7 +25,7 @@ public class LibraryService {
     }
 
     public boolean returnBook(Book book){
-        if(libraryRepository.getIssuedBooks().contains(book)){
+        if(libraryRepository.getIssuedBooks().containsKey(book)){
             libraryRepository.getIssuedBooks().remove(book);
             libraryRepository.getAvailableBooks().add(book);
             return true;
@@ -30,10 +33,10 @@ public class LibraryService {
         return false;
     }
 
-    public boolean checkoutBook(Book book){
+    public boolean checkoutBook(Book book, User user){
         if(libraryRepository.getAvailableBooks().contains(book)){
             libraryRepository.getAvailableBooks().remove(book);
-            libraryRepository.getIssuedBooks().add(book);
+            libraryRepository.getIssuedBooks().put(book, user);
             return true;
         }
         return false;
@@ -47,4 +50,14 @@ public class LibraryService {
         return false;
     }
 
+    public List<Book> getCheckoutListOfUser(User user) {
+        Map<Book, User> issuedBooks = libraryRepository.getIssuedBooks();
+        List<Book> issueBooksOfUser = new ArrayList<>();
+        for(Map.Entry<Book, User> entry : issuedBooks.entrySet()){
+            if(entry.getValue().equals(user)){
+                issueBooksOfUser.add(entry.getKey());
+            }
+        }
+        return issueBooksOfUser;
+    }
 }

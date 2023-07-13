@@ -3,18 +3,23 @@ package com.example.BiblioTeca.model;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class LibraryRepository {
 
     private List<Book> availableBooks;
+    private Map<Book, User> issuedBooks;
     private List<Movie> availableMovies;
     private List<Book> issuedBooks;
     private List<Movie> issuedMovies;
 
     public LibraryRepository() {
         this.availableBooks = new ArrayList<>();
+        this.issuedBooks = new HashMap<>();
+        this.issuedBooks.put(new Book("Java book", "Java Rowling", "1997"), new User("1", "Saurabh"));
         this.issuedBooks = new ArrayList<>();
         this.availableMovies = new ArrayList<>();
         this.issuedMovies = new ArrayList<>();
