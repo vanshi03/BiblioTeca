@@ -94,7 +94,9 @@
 
 
 package com.example.BiblioTeca;
+
 import com.example.BiblioTeca.model.Book;
+import com.example.BiblioTeca.model.Movie;
 import com.example.BiblioTeca.service.LibraryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -106,6 +108,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -118,6 +125,18 @@ class BiblioTecaControllerTest {
     @Autowired
     MockMvc mockMvc;
     @Test
+    @DisplayName("When the library getAvailableBooks is called should return null if no book is available")
+    public void checkIfAvailableRepositoryOfLibraryReturnedNullIfNoBooksAvailableInLibrary(){
+        List<Book> libraryRepo = service.getAvailableBooks();
+        assertEquals(new ArrayList<Book>(), libraryRepo);
+    }
+    @Test
+    @DisplayName("When the library getAvailableBooks is called should return null if no book is available")
+    public void checkIfAvailableRepositoryOfLibraryReturnedNullIfNoMoviesAvailableInLibrary(){
+        List<Movie> libraryRepo = service.getAvailableMovies();
+        assertEquals(new ArrayList<Movie>(), libraryRepo);
+    }
+    @Test
     @DisplayName("When the library checkOutBook is called should return true if Checkout is successful")
     public void checkIfBookIsCheckedOut() throws Exception{
         Book book = new Book("Let us C", "Yashavant Kanetkar", "2004");
@@ -128,10 +147,6 @@ class BiblioTecaControllerTest {
                         .content("{\"bookName\":\"Let us C\",\"author\":\"Yashavant Kanetkar\",\"publicationYear\":\"2004\"}"))
 //                        .content(objectMapper.writeValueAsString(book)))
                 .andExpect(status().isOk());
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated())
-//                .andExpect(content().contentType(MediaType.))
-//                                .json("{'data':[{'useRegEx':'false','hosts':'v2v2v2'}]}")));
     }
     @Test
     @DisplayName("Should be able to return an issued book")

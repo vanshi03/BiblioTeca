@@ -1,6 +1,7 @@
 package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
+import com.example.BiblioTeca.model.Movie;
 import com.example.BiblioTeca.service.LibraryService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,16 @@ public class BiblioTecaController {
         List<Book> libraryRepository = service.getAvailableBooks();
         if(libraryRepository.size() == 0) {
             return "There are no books available in the Library to display";
+        }
+        else{
+            return libraryRepository.toString();
+        }
+    }
+    @RequestMapping("/movies")
+    public String getMovies() {
+        List<Movie> libraryRepository = service.getAvailableMovies();
+        if(libraryRepository.size() == 0) {
+            return "There are no Movies available in the Library to display";
         }
         else{
             return libraryRepository.toString();
