@@ -2,14 +2,9 @@ package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.service.LibraryService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -62,7 +57,8 @@ public class BiblioTecaController {
 
     }
 
-    @RequestMapping("/viewCheckOutBook")
+    @PostMapping("/viewCheckOutBook")
+    @GetMapping(value = "/stringToJson", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean viewCheckOutBookList(@RequestBody Book book) {
         return service.checkoutBook(book);
     }

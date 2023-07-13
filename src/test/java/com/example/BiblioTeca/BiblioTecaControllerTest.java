@@ -37,16 +37,13 @@ class BiblioTecaControllerTest {
 //        List<Book> testRepo = new ArrayList<>();
 //        testRepo.add(book1);
 //        testRepo.add(book2);
-
-
 //    }
-//
 //    }
     @Test
     @DisplayName("When the library checkOutBook is called should return true if Checkout is successful")
     public void checkIfBookIsCheckedOut() throws Exception{
-        Book book = new Book("Let us C", "Yashavant Kanetkar", 2004);
-        //ObjectMapper objectMapper = new ObjectMapper();
+//        Book book = new Book("Let us C", "Yashavant Kanetkar", 2004);
+//        ObjectMapper objectMapper = new ObjectMapper();
         when(service.checkoutBook(any(Book.class))).thenReturn(true); //anyBook
 
         mockMvc.perform(post("/viewCheckOutBook")
@@ -54,10 +51,6 @@ class BiblioTecaControllerTest {
                         .content("{\"bookName\":\"Let us C\",\"author\":\"Yashavant Kanetkar\",\"publicationYear\":2004}"))
 //                        .content(objectMapper.writeValueAsString(book)))
                 .andExpect(status().isOk());
-
-
-
-
 //                        .accept(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isCreated())
 //                .andExpect(content().contentType(MediaType.))
@@ -91,7 +84,6 @@ class BiblioTecaControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
         verify(service
                 ,times(1)).returnBook(any(Book.class));
-
     }
 
 }
