@@ -2,6 +2,7 @@ package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.service.LibraryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,8 @@ public class BiblioTecaController {
         return "Welcome to the Biblioteca Library";
     }
 
-    @RequestMapping("/viewBookList")
-    public String viewBookList() {
+    @RequestMapping("/books")
+    public String getBooks() {
         List<Book> libraryRepository = service.getAvailableBooks();
         if(libraryRepository.size() == 0) {
             return "There are no books available in the Library to display";
@@ -52,8 +53,10 @@ public class BiblioTecaController {
         }
     }
     @PostMapping("/returnBook")
-    public boolean returnBook(@RequestBody Book book){
-        return service.returnBook(book);
+    public ResponseEntity returnBook(@RequestBody Book book){
+        service.returnBook(book);
+        return ResponseEntity.ok().build();
+
     }
 
 }
