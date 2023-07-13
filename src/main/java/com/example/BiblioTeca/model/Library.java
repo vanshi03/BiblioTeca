@@ -10,7 +10,7 @@ public class Library {
 
     private List<Book> repository;
     private List<Book> checkOutBookList;
-
+//    private List<Book> issuedBooks;
 
     public Library() {
         this.repository = new ArrayList<>();
@@ -18,7 +18,6 @@ public class Library {
         this.repository.add(new Book("Harry Potter", "JK Rowling"));
         this.repository.add(new Book("Let us C", "Yashavant Kanetkar", 2004));
         this.checkOutBookList.add(new Book("Let us C", "Yashavant Kanetkar", 2004));
-        this.checkOutBookList = new ArrayList<>();
         this.checkOutBookList.add(new Book("Harry Potter", "JK Rowling") );
 //        this.repository.add(new Book("Harry Potter", "JK Rowling"));
 //        this.repository.add(new Book("Let us C", "Yashavant Kanetkar", 2004));

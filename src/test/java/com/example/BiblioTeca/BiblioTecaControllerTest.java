@@ -28,11 +28,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BiblioTecaControllerTest {
 
     @MockBean
+    LibraryService libraryService;
     LibraryService service;
 
     @Autowired
     MockMvc mockMvc;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1755977 ([Anjali,Vanshi]Added Checkout functionality)
 //    @Test
 //    @DisplayName("When the library has books available and showBookList is called then it should return the list of all books available")
 //    public void checkIfAvailableRepositoryOfLibraryReturned() throws Exception{
@@ -42,12 +47,17 @@ class BiblioTecaControllerTest {
 //        List<Book> testRepo = new ArrayList<>();
 //        testRepo.add(book1);
 //        testRepo.add(book2);
+<<<<<<< HEAD
 //
 ////        when(biblioTecaController.viewBookList()).thenReturn(testRepo.toString());
+=======
+//        when(libraryService.getAvailableBooks()).thenReturn(testRepo);
+>>>>>>> 1755977 ([Anjali,Vanshi]Added Checkout functionality)
 //
 //        mockMvc.perform(MockMvcRequestBuilders.get("/viewBookList")
 //                .contentType(MediaType.APPLICATION_JSON)
 //        ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
+<<<<<<< HEAD
 //    }
 //
 //    }
@@ -56,7 +66,7 @@ class BiblioTecaControllerTest {
     public void checkIfBookIsCheckedOut() throws Exception{
         Book book = new Book("Let us C", "Yashavant Kanetkar", 2004);
         //ObjectMapper objectMapper = new ObjectMapper();
-        when(libraryService.checkoutBook(book)).thenReturn(true); //anyBook
+        when(service.checkoutBook(any(Book.class))).thenReturn(true); //anyBook
 
         mockMvc.perform(post("/viewCheckOutBook")
                 .contentType(MediaType.APPLICATION_JSON)
