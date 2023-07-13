@@ -17,6 +17,7 @@ public class LibraryRepository {
         this.availableBooks = new ArrayList<>();
         this.issuedBooks = new ArrayList<>();
         this.availableMovies = new ArrayList<>();
+        this.issuedMovies = new ArrayList<>();
         this.availableMovies.add(new Movie("Hera Pheri","Priyadarshan","2000"));
         this.issuedMovies.add(new Movie("Hera Pheri","Priyadarshan","2000"));
         this.issuedBooks.add(new Book("Java book", "Java Rowling", "1997"));

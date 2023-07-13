@@ -47,15 +47,18 @@ public class BiblioTecaController {
     @PostMapping("/returnBook")
     public boolean returnBook(@RequestBody Book book){
         return service.returnBook(book);
+        //ResponseEntity.ok().build();
+
     }
 
     @PostMapping("/checkoutBook")
+//    @GetMapping(value = "/stringToJson", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean viewCheckOutBookList(@RequestBody Book book) {
         return service.checkoutBook(book);
     }
     @PostMapping("/checkoutMovie")
+//    @GetMapping(value = "/stringToJson", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean viewCheckOutMovieList(@RequestBody Movie movie) {
         return service.checkoutMovie(movie);
     }
 }
-

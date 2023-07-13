@@ -14,6 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,6 +29,18 @@ class BiblioTecaControllerTest {
     LibraryService service;
     @Autowired
     MockMvc mockMvc;
+    @Test
+    @DisplayName("When the library getAvailableBooks is called should return null if no book is available")
+    public void checkIfAvailableRepositoryOfLibraryReturnedNullIfNoBooksAvailableInLibrary(){
+        List<Book> libraryRepo = service.getAvailableBooks();
+        assertEquals(new ArrayList<Book>(), libraryRepo);
+    }
+    @Test
+    @DisplayName("When the library getAvailableBooks is called should return null if no book is available")
+    public void checkIfAvailableRepositoryOfLibraryReturnedNullIfNoMoviesAvailableInLibrary(){
+        List<Movie> libraryRepo = service.getAvailableMovies();
+        assertEquals(new ArrayList<Movie>(), libraryRepo);
+    }
     @Test
     @DisplayName("When the library checkOutBook is called should return true if Checkout is successful")
     public void checkIfBookIsCheckedOut() throws Exception{
@@ -40,12 +56,11 @@ class BiblioTecaControllerTest {
     @Test
     @DisplayName("When the library checkOutMovie is called should return true if Checkout is successful")
     public void checkIfMovieIsCheckedOut() throws Exception{
-//        Movie book = new Movie("Let us C", "Yashavant Kanetkar", "2004");
-        //ObjectMapper objectMapper = new ObjectMapper();
-        when(service.checkoutMovie(any(Movie.class))).thenReturn(true);
+
+        when(service.checkoutMovie(any(Movie.class))).thenReturn(true); //anyBook
         mockMvc.perform(post("/checkoutMovie")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"MovieName\":\"Hera Pheri\",\"director\":\"Priyadarshan\",\"releaseYear\":\"2000\"}"))
+                        .content("{\"movieName\":\"Hera Pheri\",\"director\":\"Priyadarshan\",\"releaseYear\":\"2000\"}"))
 //                        .content(objectMapper.writeValueAsString(book)))
                 .andExpect(status().isOk());
     }
