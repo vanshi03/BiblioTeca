@@ -58,24 +58,20 @@ class BiblioTecaControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
                 verify(service
                 ,times(1)).returnBook(any(Book.class));
-
-
-
-
     }
 
-//    @Test
-//    @DisplayName("Should not be able to return a book which is not issued")
-//    public void notAbleToReturnBook() throws Exception{
-//        when(service.returnBook(any(Book.class))).thenReturn(true);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("/returnBook")
-//                        .content("{ \"bookName\": \"Harry Potter\", \"author\": \"JK Rowling\", \"publicationYear\":\"1\" }")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().string("true"));
-//
-//    }
+    @Test
+    @DisplayName("Should not be able to return a book which is not issued")
+    public void notAbleToReturnBook() throws Exception{
+        doNothing().when(service).returnBook(any(Book.class));
 
+        mockMvc.perform(MockMvcRequestBuilders.post("/returnBook")
+                        .content("{ \"bookName\": \"Harry Potter\", \"author\": \"JK Rowling\", \"publicationYear\":\"1\" }")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        verify(service
+                ,times(1)).returnBook(any(Book.class));
+
+    }
 }
