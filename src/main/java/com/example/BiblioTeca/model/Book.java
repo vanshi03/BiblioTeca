@@ -1,28 +1,22 @@
 package com.example.BiblioTeca.model;
 
 public class Book{
-    private String bookName = "";
-    private String author = "";
-    private int publicationYear = 0;
+    private String bookName = "N/A";
+    private String author = "N/A";
+    private String publicationYear = "N/A";
 
     public Book() {
-
     }
     public Book(String bookName) {
         this.bookName = bookName;
     }
-    public Book(String bookName, String author) {
+
+    public Book(String bookName, String author, String publicationYear) {
         this.bookName = bookName;
-        this.author = author;
-    }
-    public Book(String bookName, int publicationYear) {
-        this.bookName = bookName;
-        this.publicationYear = publicationYear;
-    }
-    public Book(String bookName, String author, int publicationYear) {
-        this.bookName = bookName;
-        this.author = author;
-        this.publicationYear = publicationYear;
+        if(author != null)
+            this.author = author;
+        if(publicationYear != null)
+            this.publicationYear = publicationYear;
     }
 
     public String getBookName() {
@@ -33,12 +27,30 @@ public class Book{
         return author;
     }
 
-    public int getPublicationYear() {
+    public String getPublicationYear() {
         return publicationYear;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Book book = (Book)obj;
+        if(this.bookName.equalsIgnoreCase(book.bookName))
+            return true;
+        return false;
     }
 
     @Override
     public String toString() {
-        return bookName + '\n';
+        return "Book{" +
+                "bookName='" + bookName + '\'' +
+                ", author='" + author + '\'' +
+                ", publicationYear=" + publicationYear +
+                '}';
     }
 }

@@ -14,9 +14,9 @@ public class LibraryRepository {
     public LibraryRepository() {
         this.availableBooks = new ArrayList<>();
         this.issuedBooks = new ArrayList<>();
-
-        this.availableBooks.add(new Book("Harry Potter", "JK Rowling"));
-        this.availableBooks.add(new Book("Let us C", "Yashavant Kanetkar", 2004));
+        this.issuedBooks.add(new Book("Java book", "Java Rowling", "1997"));
+        this.availableBooks.add(new Book("Harry Potter", "JK Rowling", null));
+        this.availableBooks.add(new Book("Let us C", "Yashavant Kanetkar", "2004"));
     }
 
     public List<Book> getAvailableBooks() {
@@ -29,18 +29,5 @@ public class LibraryRepository {
 
     public List<Book> getIssuedBooks() {
         return issuedBooks;
-    }
-
-    public void setIssuedBooks(Book book) {
-        this.issuedBooks.add(book);
-        this.availableBooks.remove(book);
-    }
-    public boolean returnBook(Book book){
-        boolean isRemoved = this.issuedBooks.remove(book);
-        if(isRemoved) {
-            this.availableBooks.add(book);
-            return true;
-        }
-        return false;
     }
 }
