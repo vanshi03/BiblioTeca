@@ -1,5 +1,7 @@
 package com.example.BiblioTeca.model;
 
+import java.util.Objects;
+
 public class Book{
     private String bookName = "N/A";
     private String author = "N/A";
@@ -34,7 +36,7 @@ public class Book{
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(bookName, author, publicationYear);
     }
 
     @Override

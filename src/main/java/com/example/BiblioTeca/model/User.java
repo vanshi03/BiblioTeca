@@ -1,5 +1,7 @@
 package com.example.BiblioTeca.model;
 
+import java.util.Objects;
+
 public class User {
     private String id;
     private String name;
@@ -14,7 +16,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(id);
     }
 
     @Override

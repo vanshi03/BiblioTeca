@@ -6,10 +6,7 @@ import com.example.BiblioTeca.model.Movie;
 import com.example.BiblioTeca.service.LibraryService;
 import com.example.BiblioTeca.wrapper.IssueRequestWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,30 +26,28 @@ public class BiblioTecaController {
     }
 
     @RequestMapping("/books")
-    public String getBooks() {
+    public List<Book> getBooks() throws Exception{
         List<Book> libraryRepository = service.getAvailableBooks();
         if(libraryRepository.size() == 0) {
-            return "There are no books available in the Library to display";
+            throw new Exception("There are no books available in the Library to display");
         }
         else{
-            return libraryRepository.toString();
+            return libraryRepository;
         }
     }
     @RequestMapping("/movies")
-    public String getMovies() {
+    public List<Movie> getMovies() throws Exception{
         List<Movie> libraryRepository = service.getAvailableMovies();
         if(libraryRepository.size() == 0) {
-            return "There are no Movies available in the Library to display";
+            throw new Exception("There are no Movies available in the Library to display");
         }
         else{
-            return libraryRepository.toString();
+            return libraryRepository;
         }
     }
     @PostMapping("/returnBook")
     public boolean returnBook(@RequestBody Book book){
         return service.returnBook(book);
-        //ResponseEntity.ok().build();
-
     }
 
     @PostMapping("/checkoutBook")
@@ -60,7 +55,7 @@ public class BiblioTecaController {
         return service.checkoutBook(issueRequest.getBook(), issueRequest.getUser());
     }
 
-    @PostMapping("/checkedoutBooksOfUser")
+    @GetMapping("/checkedoutBooksOfUser")
     public List<Book> viewCheckedOutBookList(@RequestBody User user) {
         return service.getCheckoutListOfUser(user);
     }
@@ -69,9 +64,8 @@ public class BiblioTecaController {
         return service.checkoutMovie(movie);
     }
 
-    @PostMapping("/userInformation")
+    @GetMapping("/userInformation")
     public User viewUser(@RequestBody String userId) {
-        System.out.println(userId);
         return service.getUserInformation(userId);
     }
 
