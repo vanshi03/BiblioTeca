@@ -65,8 +65,15 @@ public class BiblioTecaController {
         return service.getCheckoutListOfUser(user);
     }
     @PostMapping("/checkoutMovie")
-//    @GetMapping(value = "/stringToJson", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean viewCheckOutMovieList(@RequestBody Movie movie) {
         return service.checkoutMovie(movie);
     }
+
+    @PostMapping("/userInformation")
+    public User viewUser(@RequestBody String userId) {
+        System.out.println(userId);
+        return service.getUserInformation(userId);
+    }
+
+
 }

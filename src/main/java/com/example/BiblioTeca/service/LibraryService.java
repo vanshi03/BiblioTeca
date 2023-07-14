@@ -1,9 +1,6 @@
 package com.example.BiblioTeca.service;
 
-import com.example.BiblioTeca.model.Book;
-import com.example.BiblioTeca.model.LibraryRepository;
-import com.example.BiblioTeca.model.User;
-import com.example.BiblioTeca.model.Movie;
+import com.example.BiblioTeca.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,8 +11,11 @@ import java.util.Map;
 public class LibraryService {
 
     private LibraryRepository libraryRepository;
-    public LibraryService(LibraryRepository libraryRepository){
+    private UserRepository userRepository;
+
+    public LibraryService(LibraryRepository libraryRepository, UserRepository userRepository){
         this.libraryRepository = libraryRepository;
+        this.userRepository = userRepository;
     }
     public List<Book> getAvailableBooks(){
         return libraryRepository.getAvailableBooks();
@@ -34,6 +34,9 @@ public class LibraryService {
     }
 
     public boolean checkoutBook(Book book, User user){
+        if(!userRepository.getUsers().contains(user)){
+            return false;
+        }
         if(libraryRepository.getAvailableBooks().contains(book)){
             libraryRepository.getAvailableBooks().remove(book);
             libraryRepository.getIssuedBooks().put(book, user);
@@ -59,5 +62,16 @@ public class LibraryService {
             }
         }
         return issueBooksOfUser;
+    }
+
+    public User getUserInformation(String userId) {
+        List<User> users = userRepository.getUsers();
+        for(User user : users){
+            if(user.getId().equals(userId)){
+                return user;
+            }
+        }
+        System.out.println("user===============");
+        return null;
     }
 }
