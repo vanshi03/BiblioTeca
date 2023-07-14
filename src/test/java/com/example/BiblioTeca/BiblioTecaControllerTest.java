@@ -97,6 +97,7 @@ package com.example.BiblioTeca;
 
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.model.Movie;
+import com.example.BiblioTeca.model.User;
 import com.example.BiblioTeca.service.LibraryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
