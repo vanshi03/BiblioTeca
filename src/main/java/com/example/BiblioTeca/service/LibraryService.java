@@ -1,5 +1,6 @@
 package com.example.BiblioTeca.service;
 
+import com.example.BiblioTeca.exceptions.BadRequestException;
 import com.example.BiblioTeca.model.*;
 import org.springframework.stereotype.Service;
 
@@ -44,13 +45,13 @@ public class LibraryService {
         }
         return false;
     }
-    public boolean checkoutMovie(Movie movie){
+    public boolean checkoutMovie(Movie movie) throws BadRequestException{
         if(libraryRepository.getAvailableMovies().contains(movie)){
             libraryRepository.getAvailableMovies().remove(movie);
             libraryRepository.getIssuedMovies().add(movie);
             return true;
         }
-        return false;
+        throw new BadRequestException("No Movies to display");
     }
 
     public List<Book> getCheckoutListOfUser(User user) {

@@ -1,5 +1,6 @@
 package com.example.BiblioTeca;
 
+import com.example.BiblioTeca.exceptions.BadRequestException;
 import com.example.BiblioTeca.model.Book;
 import com.example.BiblioTeca.model.User;
 import com.example.BiblioTeca.model.Movie;
@@ -26,20 +27,20 @@ public class BiblioTecaController {
     }
 
     @RequestMapping("/books")
-    public List<Book> getBooks() throws Exception{
+    public List<Book> getBooks() throws BadRequestException{
         List<Book> libraryRepository = service.getAvailableBooks();
         if(libraryRepository.size() == 0) {
-            throw new Exception("There are no books available in the Library to display");
+            throw new BadRequestException("There are no books available in the Library to display");
         }
         else{
             return libraryRepository;
         }
     }
     @RequestMapping("/movies")
-    public List<Movie> getMovies() throws Exception{
+    public List<Movie> getMovies() throws BadRequestException{
         List<Movie> libraryRepository = service.getAvailableMovies();
         if(libraryRepository.size() == 0) {
-            throw new Exception("There are no Movies available in the Library to display");
+            throw new BadRequestException("There are no Movies available in the Library to display");
         }
         else{
             return libraryRepository;
@@ -60,7 +61,7 @@ public class BiblioTecaController {
         return service.getCheckoutListOfUser(user);
     }
     @PostMapping("/checkoutMovie")
-    public boolean viewCheckOutMovieList(@RequestBody Movie movie) {
+    public boolean viewCheckOutMovieList(@RequestBody Movie movie) throws BadRequestException{
         return service.checkoutMovie(movie);
     }
 
